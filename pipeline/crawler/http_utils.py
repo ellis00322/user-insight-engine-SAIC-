@@ -1,6 +1,5 @@
 """
 通用 HTTP 请求工具
-提取自 AutoPulse 项目（D:/Download/AutoPulse）的请求层，去除业务逻辑后保留：
 - User-Agent 池与随机轮换
 - 随机延迟
 - 带指数退避的自动重试
