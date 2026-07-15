@@ -38,6 +38,7 @@ venv.bak/
 # 原始数据（体积大、含隐私）
 data/raw/
 data/cache/
+data/debug/
 *.parquet
 *.feather
 *.h5

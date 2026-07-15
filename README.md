@@ -105,6 +105,7 @@ graph TB
 | 目录 / 文件 | 说明 |
 |-------------|------|
 | [`docs/proposal.md`](docs/proposal.md) | 开题报告正文（四层架构 + 命题覆盖表） |
+| [`docs/prompt-original.md`](docs/prompt-original.md) | 命题原文摘录（三个挑战 + 四个要求 + 目标句） |
 | [`docs/architecture.md`](docs/architecture.md) | 四层架构详细说明 |
 | [`research/industry-landscape.md`](research/industry-landscape.md) | 行业调研：现有洞察工具的不足与机会点 |
 | [`research/benchmark-cases.md`](research/benchmark-cases.md) | 对标案例研究与竞品矩阵 |
