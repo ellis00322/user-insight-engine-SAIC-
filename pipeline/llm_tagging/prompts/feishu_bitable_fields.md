@@ -3,6 +3,12 @@
 > 把 `data/processed/reviews_clean.csv` 导入多维表格后，在表里新增以下 AI 字段。
 > 每个字段的"提示词"直接复制粘贴进飞书 AI 字段配置的提示词框。
 > 字段定义与 `tagging_prompt.md` 保持一致。
+>
+> **⚠️ 本文档是探索期产物，字段设计已过时**：当前主路径 `tagger.py`/`tagging_prompt.md`（v0.2）
+> 的最终决定是"加 `gender`、不加 `age_bracket`、`city_tier` 移出 LLM 交给 ETL 确定性映射"，
+> 和本文档下面第 3 节把 `city_tier` 当 LLM 字段、以及"关于 age/gender"一节的结论不一致。
+> 本文档保留仅作为"如果要切回飞书 AI 字段做打标"时的参考起点，真要启用需要先按 v0.2 的
+> 字段定义改一遍，不能直接照抄下面的内容。
 
 ## 设计思路
 

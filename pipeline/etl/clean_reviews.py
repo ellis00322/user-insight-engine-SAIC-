@@ -13,9 +13,24 @@ import glob
 import hashlib
 import json
 import os
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 SERIES_NAMES_OVERRIDE_PATH = os.path.join(os.path.dirname(__file__), "series_names.json")
+
+# 回测以智己 L6 首次上市日为 T0（2024-05-13，北京时间；已用网络搜索核对，
+# 见 backtest/design.md 第 2/3 节）。注意智己 L6 2025 年还有一次改款上市
+# （同样是 5 月 13 日，巧合），但方案叙事里"新车立项"对应的是首次上市，
+# 这里的 phase 划分只认最初这次，改款款型的评论仍按首次上市日切分，
+# 一律落在 T0 之后（post）。全部 7 款车的 phase 都按同一个 T0 计算——
+# 这不是各车型自己的上市日，是"相对智己 L6 这次回测的时间锚点"。
+T0_BEIJING = datetime(2024, 5, 13, 0, 0, 0, tzinfo=timezone(timedelta(hours=8)))
+T0_TIMESTAMP = T0_BEIJING.timestamp()
+
+
+def resolve_phase(review_time):
+    if review_time is None:
+        return None
+    return "pre" if review_time < T0_TIMESTAMP else "post"
 
 
 def load_series_names_override(path):
@@ -145,6 +160,7 @@ def clean_record(raw, override_map):
         "is_short_content": len(content) < SHORT_CONTENT_THRESHOLD,
         "review_time": review_time,
         "pub_date": to_pub_date(review_time),
+        "phase": resolve_phase(review_time),
         "buy_place": raw.get("buy_place"),
         "city_tier": resolve_city_tier(raw.get("buy_place")),
         "car_price_wan": parse_price_wan(raw.get("car_price")),
