@@ -50,7 +50,8 @@ def parse_review_item(item: dict, series_id: str) -> dict:
     return {
         "review_id": f"dcd_{series_id}_{gid_str}" if gid_str else None,
         "series_id": series_id,
-        "car_config": _first(buy_info, "car_name") or _first(item, "series_name"),
+        "series_name": _first(item, "series_name"),
+        "car_config": _first(buy_info, "car_name"),
         "review_time": _first(item, "create_time", "publish_time", "time"),
         "buy_place": _first(buy_info, "location"),
         "car_price": _first(buy_info, "price"),

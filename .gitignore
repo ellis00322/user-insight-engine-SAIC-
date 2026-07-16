@@ -39,6 +39,7 @@ venv.bak/
 data/raw/
 data/cache/
 data/debug/
+data/processed/
 *.parquet
 *.feather
 *.h5
@@ -50,6 +51,9 @@ data/debug/
 *.bin
 *.ckpt
 *.safetensors
+
+# 手工维护的数据类 JSON（车型名兜底表等，属于数据而非代码）
+pipeline/etl/series_names.json
 
 # 超过 50MB 的数据文件类型（git-lfs 管理或忽略）
 *.csv.gz
@@ -78,6 +82,11 @@ Desktop.ini
 # Jupyter
 .ipynb_checkpoints/
 *.ipynb
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
 
 # 日志
 *.log
