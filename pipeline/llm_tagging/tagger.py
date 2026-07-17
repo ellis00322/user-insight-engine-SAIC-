@@ -1,4 +1,15 @@
 """
+【已废弃 v1 方案，不要用来跑打标】
+
+人工抽检 data/reviews tagged.csv 发现：life_stage/purchase_motivation/purchase_stage
+的 evidence 字段约 73%（500 条有值记录中 366 条）是 Prompt 模板里的占位说明文字
+"原文引用或 null" 被模型原样抄了回来，不是真实原文引用；本文件的校验逻辑（parse_and_validate）
+只检查 value 是否在枚举范围内，没有检查 evidence 是否真的来自原文，问题一路混进了最终数据。
+当前主路径改为「飞书多维表格 AI 字段做维度提取 + Python 补全脚本补情感/画像」，详见
+pipeline/llm_tagging/README.md 的「版本变更记录」。本文件保留仅作历史参考。
+
+---
+
 批量调用智谱 GLM（OpenAI 兼容模式）API，对 data/processed/reviews_clean.csv
 里的评论做结构化打标，输出到 data/processed/reviews_tagged.jsonl。
 

@@ -40,6 +40,13 @@ data/raw/
 data/cache/
 data/debug/
 data/processed/
+
+# 顶层 data/ 目录下散落的打标结果文件（同样是抓取内容衍生数据，不入库；
+# 之前只忽略了 raw/cache/debug/processed 四个子目录，data/ 根下的文件会漏网，
+# 比如 data/reviews tagged.csv 这种宽表导出，之前 git status 显示为可被 add 的未跟踪文件）
+data/*.csv
+data/*.xlsx
+data/*.jsonl
 *.parquet
 *.feather
 *.h5

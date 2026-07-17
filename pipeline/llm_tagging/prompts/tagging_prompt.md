@@ -1,5 +1,10 @@
 # LLM 结构化打标 Prompt
 
+> **⚠️ 已废弃（v1 方案）**：本文档是 `tagger.py` 的 Prompt/Schema 定义，`tagger.py` 已停用——
+> 人工抽检发现约 73% 的 evidence 字段是本文档 Schema 里的占位说明文字被模型抄了回来，不是
+> 真实原文引用（详见 `pipeline/llm_tagging/README.md` 的「版本变更记录」）。当前打标主路径见
+> [`feishu_bitable_fields.md`](feishu_bitable_fields.md)。本文档保留仅作历史参考。
+
 **版本**：v0.2（与 `pipeline/llm_tagging/tagger.py` 里实际发给 LLM 的 prompt 保持一致，这里是唯一权威定义）  
 **适用场景**：对单条车主口碑评论进行结构化用户画像提取  
 **模型要求**：支持长上下文（≥ 4K tokens）的指令遵循型模型；当前接入智谱 GLM-4-Flash
