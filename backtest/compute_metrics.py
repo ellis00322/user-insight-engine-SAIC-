@@ -146,10 +146,12 @@ def compute_pos(pred_records, actual_records):
 # ---------------------------------------------------------------------------
 
 def positive_dimension_counts(records):
+    """"其他"是打标时分不出具体维度的兜底桶，不代表一个真实卖点，不参与 Top-K 排名
+    ——否则预测组和实际组的"其他"桶各自体量大时会被误判成"命中同一个卖点"。"""
     counter = Counter()
     for r in records:
         for ds in r.get("llm_tags", {}).get("dimension_sentiments") or []:
-            if ds.get("sentiment") == "正面":
+            if ds.get("sentiment") == "正面" and ds.get("dimension") != "其他":
                 counter[ds.get("dimension")] += 1
     return counter
 
@@ -167,10 +169,13 @@ def compute_dmr(pred_records, actual_records, k):
 # ---------------------------------------------------------------------------
 
 def majority_sentiment_per_dimension(records):
-    """每个维度出现次数最多的情感方向（正面/负面/中性），作为该维度的"代表情感"。"""
+    """每个维度出现次数最多的情感方向（正面/负面/中性），作为该维度的"代表情感"。
+    "其他"同样排除，理由见 positive_dimension_counts。"""
     counts = defaultdict(Counter)
     for r in records:
         for ds in r.get("llm_tags", {}).get("dimension_sentiments") or []:
+            if ds.get("dimension") == "其他":
+                continue
             counts[ds.get("dimension")][ds.get("sentiment")] += 1
     return {dim: c.most_common(1)[0][0] for dim, c in counts.items()}
 
